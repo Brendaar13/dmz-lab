@@ -107,7 +107,9 @@ Red Externa (Internet)
 ### 6. Conclusiones y recomendaciones
 
 > Diseñar y asegurar una red segmentada aplicando correctamente los conceptos de DMZ, NAT y ACLs en un entorno simulado como Cisco Packet Tracer.
+
 Así mismo, comprendí cómo aislar servicios críticos en una zona intermedia para proteger la red interna, y cómo utilizar NAT estático para publicar un servidor web hacia el exterior de forma controlada.
+
 Además, intenté reforzar la importancia de las ACLs para permitir solo el tráfico necesario y evitar accesos no autorizados entre las diferentes zonas de la red. No obstante, lo último no fue tan efectivo debido a la configuración utilizada por lo que es importante tener esto en cuenta a futuro
 
 
