@@ -3,19 +3,37 @@
 
 ### 1. Objetivo del laboratorio
 
-> Explica brevemente quÃ© se buscaba lograr con este laboratorio.
+> Tiene como objetivo desarrollar competencias en ciberseguridad defensiva mediante la implementación de una Zona Desmilitarizada (DMZ) en Cisco Packet Tracer.
+A través de la configuración de routers, switches, servidores y ACLs, se aprenderá a aislar servicios críticos, controlar el tráfico entre redes internas y externas, y evitar exponer servicios públicos de manera segura y controlada.
 
 **Ejemplo:**  
-Configurar una DMZ segura usando un router Cisco ISR, aplicando NAT y ACLs para controlar el trÃ¡fico entre LAN, DMZ y red externa.
+Configurar una DMZ segura usando un router Cisco ISR, aplicando NAT y ACLs para controlar el tráfico entre LAN, DMZ y red externa.
 
 ---
 
 ### 2. TopologÃ­a implementada
+<img width="970" height="512" alt="image" src="https://github.com/user-attachments/assets/65ca8f9c-7653-4f53-8c13-d62eab053ff5" />
 
-> Describe la red. Puedes incluir una imagen si el software lo permite (captura de Packet Tracer).
+Cantidad de redes: 3
 
-- Cantidad de redes: __________
-- Dispositivos usados: __________
+    Red LAN interna (192.168.1.0/24)
+
+    Red DMZ (192.168.2.0/24)
+
+    Red Externa (200.1.1.0/24)
+
+Dispositivos usados:
+
+    1 Router Cisco ISR 2911 (Router_FW – actúa como cortafuegos y punto de interconexión entre redes)
+
+    3 Switches Cisco 2960 (SW_Internal, SW_DMZ, SW_External)
+
+    1 Servidor Web (Server-PT Web_DMZ) en la DMZ
+
+    1 PC Interno (PC_Internal) en la LAN
+
+    1 PC Externo (PC_External) en la red simulada de Internet
+
 - Breve descripciÃ³n de la funciÃ³n de cada zona (LAN, DMZ, Externa).
 
 
