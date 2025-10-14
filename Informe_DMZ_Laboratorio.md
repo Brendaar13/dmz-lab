@@ -56,7 +56,7 @@ Red Externa (Internet)
 | Router_FW Gi0/2 (Ext)   | 192.168.3.1      | 255.255.255.0     |    -              |
 
 
-### 4. Configuración aplicada (resumen)
+### 4. Configuración aplicada y verificaciones realizadas
 
 > Primero se configura la direccionamiento IP. Luego se configura el Router2 cpmo aparece a continuación
 
