@@ -1,4 +1,4 @@
-# Informe de configuraciÃ³n de DMZ con Cisco Packet Tracer
+# Informe de configuración de DMZ con Cisco Packet Tracer
 
 
 ### 1. Objetivo del laboratorio
@@ -34,58 +34,82 @@ Dispositivos usados:
 
     1 PC Externo (PC_External) en la red simulada de Internet
 
-- Breve descripciÃ³n de la funciÃ³n de cada zona (LAN, DMZ, Externa).
+LAN (Red Interna)
+        Zona privada y segura donde se encuentran los equipos de los usuarios internos. Solo tiene acceso controlado a Internet mediante NAT y está protegida por las ACLs del router.
 
+DMZ (Zona Desmilitarizada)
+        Área intermedia y parcialmente expuesta, destinada a alojar servicios públicos. Permite conexiones desde el exterior únicamente a servicios específicos, sin comprometer la seguridad de la red interna.
+
+Red Externa (Internet)
+        Simula el acceso desde Internet. Los equipos en esta red pueden interactuar con los servicios de la DMZ, pero no tienen acceso directo a la red interna.
 
 
 ### 3. Plan de direccionamiento IP
 
-Completa la tabla con las IPs asignadas (puedes copiarla del enunciado si no cambiÃ³).
-
-| Dispositivo             | IP              | MÃ¡scara           | Gateway           |
+| Dispositivo             | IP              | Máscara           | Gateway           |
 |-------------------------|------------------|-------------------|-------------------|
-| PC_Internal             |                  |                   |                   |
-| Server_DMZ              |                  |                   |                   |
-| PC_External             |                  |                   |                   |
-| Router_FW Gi0/0 (LAN)   |                  |                   |                   |
-| Router_FW Gi0/1 (DMZ)   |                  |                   |                   |
-| Router_FW Gi0/2 (Ext)   |                  |                   |                   |
+| PC_Internal             | 192.168.1.10     | 255.255.255.0     | 192.168.1.1       |
+| Server_DMZ              | 192.168.2.10     | 255.255.255.0     | 192.168.2.1       |
+| PC_External             | 192.168.3.10     | 255.255.255.0     | 192.168.3.1       |
+| Router_FW Gi0/0 (LAN)   | 192.168.1.1      | 255.255.255.0     |    -              |
+| Router_FW Gi0/1 (DMZ)   | 192.168.2.1      | 255.255.255.0     |    -              |
+| Router_FW Gi0/2 (Ext)   | 192.168.3.1      | 255.255.255.0     |    -              |
 
 
-### 4. ConfiguraciÃ³n aplicada (resumen)
+### 4. Configuración aplicada (resumen)
 
-> Resume los comandos o pasos mÃ¡s relevantes que ejecutaste. Usa texto + fragmentos de cÃ³digo cuando sea necesario.
+> Primero se configura la direccionamiento IP. Luego se configura el Router2 cpmo aparece a continuación
 
-- Interfaces configuradas con `ip address`
-- NAT:
-```bash
-ip nat inside source static 192.168.2.10 192.168.3.1
-```
-- ACLs:
-```bash
-access-list 101 permit tcp any host 192.168.3.1 eq 80
-access-list 100 deny ip 192.168.2.0 0.0.0.255 192.168.1.0 0.0.0.255
-```
+    denable
+    configure terminal
+    hostname Router_FW
+    
+    interface GigabitEthernet0/0
+    ip address 192.168.1.1 255.255.255.0
+    ip nat inside
+    no shutdown
+    exit
+    
+    interface GigabitEthernet0/1
+    ip address 192.168.2.1 255.255.255.0
+    ip nat inside
+    no shutdown
+    exit
+    
+    interface GigabitEthernet0/2
+    ip address 192.168.3.1 255.255.255.0
+    ip nat outside
+    no shutdown
+    exit
+    
+    end
+    write memory
+    
+> Luego se configura la conectividad básica
 
+        ping 192.168.1.1   
+        ping 192.168.2.1   
+        ping 192.168.3.1   
+        
+> Se configura el NAT estático
 
+        ip nat inside source static 192.168.2.10 192.168.3.1
 
-### 5. Verificaciones realizadas
+> Pruebas iniciales de acceso web
 
-> Describe las pruebas y su resultado. Incluye capturas o salidas de comandos si se puede.
+    Desde PC_External, acceder a http://192.168.3.1
+    Desde PC_Internal, acceder a http://192.168.2.10
 
-- `ping` desde PC_Internal al router: âœ…
-- Acceso web desde PC_External: âœ…
-- Bloqueo de acceso desde DMZ a LAN: âœ…
+> Finalmente
+
 
 
 ### 6. Conclusiones y recomendaciones
 
-> Â¿QuÃ© aprendiste con este ejercicio? Â¿QuÃ© mejorarÃ­as?
-
-**Ejemplo:**
-AprendÃ­ a aplicar NAT y ACLs en un entorno simulado. Recomiendo verificar conectividad bÃ¡sica antes de aplicar reglas de firewall, ya que un error en la IP puede bloquear todo.
+> Diseñar y asegurar una red segmentada aplicando correctamente los conceptos de DMZ, NAT y ACLs en un entorno simulado como Cisco Packet Tracer.
+Así mismo, comprendí cómo aislar servicios críticos en una zona intermedia para proteger la red interna, y cómo utilizar NAT estático para publicar un servidor web hacia el exterior de forma controlada.
+Además, intenté reforzar la importancia de las ACLs para permitir solo el tráfico necesario y evitar accesos no autorizados entre las diferentes zonas de la red. No obstante, lo último no fue tan efectivo debido a la configuración utilizada por lo que es importante tener esto en cuenta a futuro
 
 
 ### 7. Capturas de evidencia
 
-> Adjunta aquÃ­ (o en un PDF anexo) las capturas solicitadas: pings, navegador, comandos `show`, etc.
