@@ -1,6 +1,6 @@
 # Objetivo
 
-Este laboratorio tiene como objetivo implementar y validar una arquitectura de red segmentada con zonas LAN, DMZ y Externa, aplicando principios básicos de seguridad perimetral y control de acceso.
+Este laboratorio tiene como objetivo implementar y validar una arquitectura de red segmentada con zonas LAN, DMZ y Externa, aplicando principios básicos de seguridad perimetral y control de acceso
 
 # Contenidos
 
@@ -18,6 +18,6 @@ El repositorio incluye:
         Acceso HTTP desde la red externa al servidor DMZ.
         Verificación de bloqueos entre DMZ y LAN.
 
-🧠 Resultado esperado
+# Resultado esperado
 
-Garantizar conectividad básica entre zonas, exposición segura de servicios públicos y aislamiento efectivo de la red interna.
+Garantizar conectividad básica entre zonas, exposición segura de servicios públicos y aislamiento efectivo de la red interna
