@@ -11,7 +11,7 @@ Configurar una DMZ segura usando un router Cisco ISR, aplicando NAT y ACLs para 
 
 ---
 
-### 2. TopologÃ­a implementada
+### 2. Topologí­a implementada
 <img width="970" height="512" alt="image" src="https://github.com/user-attachments/assets/65ca8f9c-7653-4f53-8c13-d62eab053ff5" />
 
 Cantidad de redes: 3
@@ -102,7 +102,23 @@ Red Externa (Internet)
 
 > Finalmente
 
+        Configure terminal
+        access-list 120 permit tcp 192.168.3.0 0.0.0.255 host 192.168.3.1 eq 80
+        access-list 120 deny ip any any
+        interface GigabitEthernet 0/2
+        ip access-group 120 in
+        end 
+        wr
 
+        Configure terminal
+        access-list 110 permit tcp 192.168.1.0 0.0.0.255 192.168.2.10 0.0.0.0 eq 80
+        access-list 110 permit tcp 192.168.2.10 0.0.0.0 192.168.1.0 0.0.0.255 established
+        access-list 110 deny ip 192.168.2.0 0.0.0.255 192.168.1.0 0.0.0.255
+        access-list 110 permit ip any any !
+        interface GigabitEthernet 0/1
+        ip access-group 110 in
+        end
+        wr
 
 ### 6. Conclusiones y recomendaciones
 
@@ -110,8 +126,7 @@ Red Externa (Internet)
 
 > Así mismo, comprendí cómo aislar servicios críticos en una zona intermedia para proteger la red interna, y cómo utilizar NAT estático para publicar un servidor web hacia el exterior de forma controlada.
 
-> Además, intenté reforzar la importancia de las ACLs para permitir solo el tráfico necesario y evitar accesos no autorizados entre las diferentes zonas de la red. No obstante, lo último no fue tan efectivo debido a la configuración utilizada por lo que es importante tener esto en cuenta a futuro
-
 
 ### 7. Capturas de evidencia
+Enlace al pdf con imágenes: https://drive.google.com/file/d/1EwuPqALnXtRX9FjOXHXndYAS1IkcivYF/view?usp=sharing
 
